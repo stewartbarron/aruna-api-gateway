@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: api-gateway
+  config:
+    import: optional:configserver:http://localhost:8888
+  cloud:
+    gateway:
+      routes:
+        - id: currency-exchange
+          uri: http://localhost:8000/
+          predicates:
+            - Path=/currency-exchange/**
+        - id: currency-conversion
+          uri: http://localhost:8100/
+          predicates:
+            - Path=/currency-conversion-feign/**
+server:
+  port: 8765
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
