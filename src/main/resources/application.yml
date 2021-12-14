@@ -14,6 +14,9 @@ spring:
           uri: http://localhost:8100/
           predicates:
             - Path=/currency-conversion-feign/**
+  sleuth:
+    sampler:
+      probablity: 1
 server:
   port: 8765
 
